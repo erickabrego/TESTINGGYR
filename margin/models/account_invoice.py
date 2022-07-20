@@ -19,7 +19,7 @@ class account_invoice_line(models.Model):
             frm_cur = self.env.company.currency_id
             to_cur = n.move_id.currency_id
             purchase_price = n.product_id.standard_price
-            if n.product_uom_id != n.product_id.uom_id:
+            if n.product_uom_id and n.product_id.uom_id and n.product_uom_id != n.product_id.uom_id:
                 purchase_price = n.product_id.uom_id._compute_price(purchase_price, n.product_uom_id)            
             price = frm_cur._convert(
                                     purchase_price, to_cur,
